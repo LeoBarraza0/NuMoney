@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NequiClone</title>
+    <link rel="stylesheet" href="/srtyles.css">
+</head>
+<body>
+    <div id="app">
+        <div id="loginContainer" class="auth-container">
+            <h1>Welcome to NequiClone</h1>
+            <form id="loginForm" class="auth-form">
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p>Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+        </div>
+
+        <div id="registerContainer" class="auth-container hidden">
+            <h1>Register for NequiClone</h1>
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="regName">Full Name</label>
+                    <input type="text" id="regName" name="regName" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPhone">Phone Number</label>
+                    <input type="tel" id="regPhone" name="regPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="regEmail">Email</label>
+                    <input type="email" id="regEmail" name="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password</label>
+                    <input type="password" id="regPassword" name="regPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+            </form>
+            <p>Already have an account? <a href="#" id="showLogin">Login here</a></p>
+        </div>
+
+        <div id="mainApp" class="hidden">
+            <header>
+                <div class="user-info">
+                    <img id="userAvatar" src="" alt="User Avatar" class="avatar">
+                    <div>
+                        <h2 id="userName"></h2>
+                        <p id="userEmail"></p>
+                    </div>
+                </div>
+                <button id="notificationBtn" class="icon-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    <span id="notificationCount" class="notification-badge hidden">0</span>
+                </button>
+            </header>
+
+            <main>
+                <section id="accountBalance" class="card">
+                    <h3>Account Balance</h3>
+                    <select id="accountSelect">
+                        <option value="">Select account</option>
+                    </select>
+                    <p id="balance" class="balance"></p>
+                    <div class="button-group">
+                        <button id="addMoneyBtn" class="button">Add Money</button>
+                        <button id="withdrawBtn" class="button">Withdraw</button>
+                    </div>
+                </section>
+
+                <nav class="tabs">
+                    <button class="tab-button active" data-tab="quickActions">Quick Actions</button>
+                    <button class="tab-button" data-tab="transactions">Transactions</button>
+                    <button class="tab-button" data-tab="services">Services</button>
+                </nav>
+
+                <section id="quickActions" class="tab-content active">
+                    <div class="grid">
+                        <button id="transferBtn" class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-send"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                            Transfer
+                        </button>
+                        <button id="payBillsBtn" class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-credit-card"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+                            Pay Bills
+                        </button>
+                        <button id="requestMoneyBtn" class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-dollar-sign"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                            Request Money
+                        </button>
+                        <button id="rechargeBtn" class="action-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-smartphone"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                            Recharge
+                        </button>
+                    </div>
+                </section>
+
+                <section id="transactions" class="tab-content">
+                    <h3>Recent Transactions</h3>
+                    <div id="transactionsList"></div>
+                </section>
+
+                <section id="services" class="tab-content">
+                    <h3>Available Services</h3>
+                    <form id="servicePaymentForm">
+                        <select id="serviceType" required>
+                            <option value="">Select service type</option>
+                        </select>
+                        <select id="serviceProvider" required>
+                            <option value="">Select provider</option>
+                        </select>
+                        <input type="number" id="serviceAmount" placeholder="Enter amount" required>
+                        <input type="text" id="serviceAccountNumber" placeholder="Enter account/phone number" required>
+                        <button type="submit" class="button">Pay Service</button>
+                    </form>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <form id="modalForm">
+                <div id="modalFields"></div>
+                <p id="modalError" class="error"></p>
+                <button type="submit" id="modalSubmit" class="button">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="notificationModal" class="modal">
+        <div class="modal-content">
+            <h2>Notifications</h2>
+            <div id="notificationList"></div>
+            <button id="closeNotifications" class="button">Close</button>
+        </div>
+    </div>
+
+    <script src="/script.js"></script>
+</body>
+</html>
